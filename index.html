@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZIYY TAMVAN - Pemulihan WhatsApp</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #111;
+      overflow: hidden;
+      color: #fff;
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #0f0;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: #0f0;
+      color: #111;
+      padding: 15px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0c0;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 16px;
+      color: #aaa;
+    }
+
+    .wm {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="container">
+  <h1>🔓 Pemulihan WhatsApp - ZIYY TAMVAN</h1>
+
+  <!-- Tombol: Terblokir karena Spam -->
+  <button onclick="window.location.href='mailto:support@whatsapp.com?subject=Banding%20Pemblokiran%20Akun%20Karena%20Spam&body=Kepada%20Tim%20Dukungan%20WhatsApp%2C%0A%0ASaya%20ingin%20mengajukan%20banding%20karena%20akun%20WhatsApp%20saya%20diblokir%20karena%20diduga%20melakukan%20spam.%20Saya%20tidak%20merasa%20melakukan%20pelanggaran%20terhadap%20ketentuan%20layanan.%0A%0AMohon%20bantuannya%20untuk%20meninjau%20kembali%20status%20akun%20saya%20dan%20memulihkan%20aksesnya.%0A%0ANomor%20WhatsApp%3A%2062xxxxxxxxxxx%0A%0ATerima%20kasih%20atas%20perhatiannya.%0A%0AHormat%20saya%2C%0A[Nama%20Anda]'">
+    🚫 Terblokir karena Spam
+  </button>
+
+  <!-- Tombol: Tidak Bisa Menggunakan WhatsApp Lagi -->
+  <button onclick="window.location.href='mailto:support@whatsapp.com?subject=Akun%20Saya%20Tidak%20Bisa%20Digunakan%20Lagi&body=Kepada%20Tim%20WhatsApp%2C%0A%0AAkun%20saya%20tidak%20bisa%20digunakan%20lagi%20dan%20tidak%20diketahui%20penyebabnya.%20Mohon%20informasi%20dan%20bantuannya%20agar%20akun%20saya%20bisa%20diaktifkan%20kembali.%0A%0ANomor%20WhatsApp%3A%2062xxxxxxxxxxx%0A%0ATerima%20kasih.%0A%0AHormat%20saya%2C%0A[Nama%20Anda]'">
+    ❌ Tidak Bisa Menggunakan WhatsApp Lagi
+  </button>
+
+  <!-- Tombol: Terkena Limit -->
+  <button onclick="window.location.href='mailto:support@whatsapp.com?subject=Permintaan%20Pembukaan%20Limit%20Grup&body=Kepada%20Tim%20WhatsApp%2C%0A%0ASaya%20mendapatkan%20pemberitahuan%20bahwa%20saya%20terkena%20limit%20karena%20terlalu%20sering%20menambahkan%20orang%20ke%20grup.%20Saya%20memohon%20agar%20limit%20tersebut%20dapat%20dibuka%2C%20karena%20saya%20menggunakan%20grup%20untuk%20kepentingan%20komunitas.%0A%0ANomor%20WhatsApp%3A%2062xxxxxxxxxxx%0A%0ATerima%20kasih%20banyak.%0A%0AHormat%20saya%2C%0A[Nama%20Anda]'">
+    📵 Terkena Limit Tambah ke Grup
+  </button>
+
+  <!-- Tombol: WhatsApp Tidak Resmi -->
+  <button onclick="window.location.href='mailto:support@whatsapp.com?subject=Blokir%20Akun%20Karena%20WhatsApp%20Tidak%20Resmi&body=Kepada%20Tim%20WhatsApp%2C%0A%0AAkun%20saya%20telah%20diblokir%20karena%20menggunakan%20aplikasi%20WhatsApp%20tidak%20resmi.%20Saya%20sudah%20menghapus%20aplikasi%20tersebut%20dan%20ingin%20menggunakan%20aplikasi%20resmi.%0A%0AMohon%20agar%20akun%20saya%20bisa%20diaktifkan%20kembali.%0A%0ANomor%20WhatsApp%3A%2062xxxxxxxxxxx%0A%0ATerima%20kasih%20atas%20pengertiannya.%0A%0AHormat%20saya%2C%0A[Nama%20Anda]'">
+    📴 WhatsApp Tidak Resmi
+  </button>
+
+  <div class="note">
+    📌 Contoh nomor WhatsApp: <strong>62xxxxxxxxxxx</strong><br>
+    (Ganti dengan nomor kamu sebelum kirim email)
+  </div>
+
+  <div class="wm">©ZIYY TAMVAN</div>
+</div>
+
+<!-- Script Efek Bintang Jatuh -->
+<script>
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  let stars = [];
+
+  for (let i = 0; i < 100; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 2,
+      speed: Math.random() * 3 + 1
+    });
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    for (let star of stars) {
+      ctx.beginPath();
+      ctx.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  }
+
+  function updateStars() {
+    for (let star of stars) {
+      star.y += star.speed;
+      if (star.y > canvas.height) {
+        star.y = 0;
+        star.x = Math.random() * canvas.width;
+      }
+    }
+  }
+
+  function animate() {
+    drawStars();
+    updateStars();
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>
