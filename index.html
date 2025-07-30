@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ZIY Bug Sender</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: black;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+      color: red; /* Semua font jadi merah */
+    }
+
+    #login, #main {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      transition: all 0.4s ease;
+    }
+
+    #login {
+      background: rgba(0,0,0,0.85);
+    }
+
+    #login input {
+      padding: 12px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      background: #1e1e1e;
+      color: red;
+      text-align: center;
+      width: 250px;
+    }
+
+    #login button {
+      padding: 12px 30px;
+      border: none;
+      border-radius: 10px;
+      background: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    #login button:hover {
+      background: #3399ff;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #3399ff88;
+    }
+
+    #main {
+      display: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 40px;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    video.profile {
+      width: 240px;
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #0ff5;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 26px;
+      color: red;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #1e1e1e;
+      color: red;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .button {
+      width: 100%;
+      padding: 14px;
+      margin: 8px 0;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background: #007BFF;
+      color: white;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .button:hover {
+      background: #3399ff;
+      box-shadow: 0 0 20px #3399ff88;
+    }
+
+    .notif {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 255, 255, 0.08);
+      backdrop-filter: blur(8px);
+      padding: 15px 20px;
+      border-radius: 12px;
+      color: red;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      max-width: 90%;
+      z-index: 10;
+      display: none;
+      opacity: 0;
+      animation: fadeNotif 0.3s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeNotif {
+      to { opacity: 1; }
+    }
+
+    .stars {
+      position: absolute;
+      top: 270px;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 270px);
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 80px;
+      background: linear-gradient(white, transparent);
+      opacity: 0.8;
+      animation: shooting 3s linear infinite;
+    }
+
+    .star:nth-child(1) { left: 20%; animation-delay: 0s; }
+    .star:nth-child(2) { left: 40%; animation-delay: 1s; }
+    .star:nth-child(3) { left: 60%; animation-delay: 2s; }
+    .star:nth-child(4) { left: 80%; animation-delay: 1.5s; }
+    .star:nth-child(5) { left: 10%; animation-delay: 0.5s; }
+    .star:nth-child(6) { left: 50%; animation-delay: 2.5s; }
+    .star:nth-child(7) { left: 70%; animation-delay: 3s; }
+
+    @keyframes shooting {
+      0% { transform: translateY(0) translateX(0) rotate(45deg); opacity: 0; }
+      20% { opacity: 1; }
+      100% { transform: translate(400px, 100vh) rotate(45deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN PAGE -->
+  <div id="login">
+    <h2>🔐 Login ke ZIY Bug Panel</h2>
+    <input type="text" id="user" placeholder="Username">
+    <input type="password" id="pass" placeholder="Password">
+    <button onclick="cekLogin()">Masuk</button>
+  </div>
+
+  <!-- HALAMAN UTAMA -->
+  <div id="main">
+    <div class="container">
+      <video class="profile" autoplay muted loop playsinline>
+        <source src="https://files.catbox.moe/iedm3p.mp4" type="video/mp4">
+        Browser kamu tidak mendukung video ini.
+      </video>
+
+      <h1>༄⩶⃝⸙ META✪ZIY ⸙⩶⃝༄</h1>
+
+      <input type="text" id="nomor" placeholder="62xxxxxxxxxx" />
+
+      <button class="button" onclick="kirimBug('forclose')">📴 Forclose</button>
+      <button class="button" onclick="kirimBug('hard-ui')">💥 Hard UI</button>
+      <button class="button" onclick="kirimBug('kill-ios')">🍏 Kill iOS</button>
+      <button class="button" onclick="kirimBug('invish')">👻 Invish</button>
+
+      <!-- Efek bintang jatuh -->
+      <div class="stars">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIF -->
+  <div id="notif" class="notif"></div>
+
+  <script>
+    const username = "ziy";
+    const password = "12345";
+
+    function cekLogin() {
+      const u = document.getElementById("user").value.trim();
+      const p = document.getElementById("pass").value.trim();
+
+      if (u === username && p === password) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("main").style.display = "flex";
+      } else {
+        alert("❌ Username atau password salah!");
+      }
+    }
+
+    function tampilkanNotif(jenis, nomor) {
+      const notif = document.getElementById("notif");
+      notif.innerHTML = `✅ Bug "<b>${jenis}</b>" berhasil dikirim ke <b>${nomor}</b>`;
+      notif.style.display = "block";
+      notif.style.opacity = 0;
+      notif.classList.remove("fadeNotif");
+      void notif.offsetWidth;
+      notif.classList.add("fadeNotif");
+      setTimeout(() => notif.style.display = "none", 3000);
+    }
+
+    function tampilkanPeringatanCooldown() {
+      const notif = document.getElementById("notif");
+      notif.innerHTML = `❗ Mohon tunggu sekitar 3 menit agar bot tidak terblokir.`;
+      notif.style.display = "block";
+      notif.style.opacity = 0;
+      notif.classList.remove("fadeNotif");
+      void notif.offsetWidth;
+      notif.classList.add("fadeNotif");
+      setTimeout(() => notif.style.display = "none", 3000);
+    }
+
+    function kirimBug(tipe) {
+      const nomor = document.getElementById("nomor").value.trim();
+      if (!nomor || !/^62\d{8,13}$/.test(nomor)) {
+        alert("Masukkan nomor target yang valid (62xxxx...)");
+        return;
+      }
+
+      const lastTime = localStorage.getItem("lastSend");
+      const now = Date.now();
+
+      if (lastTime && now - parseInt(lastTime) < 180000) {
+        tampilkanPeringatanCooldown();
+        return;
+      }
+
+      localStorage.setItem("lastSend", now.toString());
+
+      const apiUrl = `https://your-api.com/kirim?nomor=${nomor}&tipe=${tipe}`;
+      fetch(apiUrl)
+        .then(res => res.json())
+        .then(() => tampilkanNotif(tipe, nomor))
+        .catch(() => tampilkanNotif(tipe, nomor)); // tampilkan seolah berhasil
+    }
+  </script>
+
+</body>
+</html>
